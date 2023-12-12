@@ -1,5 +1,4 @@
 # 0. Machine Learning
-
 ## 0.1 AI History
 ### Approaches
 <img width="400" alt="image" src="https://github.com/baejaeho18/MyLibrary/assets/37645490/0468952e-3c6b-4ef8-822b-346f04bf8860"> <br>
@@ -151,4 +150,7 @@ mutual information : y를 알고 난 후에 x의 불확실성을 줄이는 과�
 
 ## SVM
 
+
+
+[[blog]](https://norman3.github.io/prml/)
 ## HMM
