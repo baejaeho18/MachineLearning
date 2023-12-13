@@ -87,10 +87,24 @@ $$E_{RMS} = \sqrt{\frac{2E(w^*)}{N}} (N:sample\ size)$$
   - cov[x,y] = E_{x,y}[(x - E[x])(y^T - E[y^T])] = E_{x,y}[xy^T] - E[x]E[y^T] (벡터)
 
 ### 0.2.3 Bayesian Probabilities
-실제 측정된 빈도수에 따라 확률을 계산하는 Frequentism과 다르게 Baysianism은 믿음의 정도로 불확실성을 정량화할 수 있다.
+실제 측정된 빈도수에 따라 확률을 계산하는 Frequentism과 다르게 Baysianism은 믿음의 정도로 불확실성을 정량화할 수 있다. MLE(Maximun Likelihood Estimation)과 달리, 파라미터 w를 랜덤변수로 간주하여 확률분포를 사용한다. 
+$$p(w|D) = \frac{p(D|w)p(w)}{p(D)}$$
+관찰되는 데이터가 존재하기 이전에 이미 p(w)를 통해 w의 불확실한 정도(prior)를 수식에 반영하고 있다.
+이후 실제 데이터를 통해 예측된 w의 확률(likelihood)를 조합하여 실제 w의 사후 확률(posterior)을 기술한다.
+사전확률로 인해 덜 극단적인 결과를 얻도록 보정된다.
+예를 들어, 사후 확률이 최대가 되는 파라미터 값을 찾는 MAP(Maximum A Posteriori) 추정은 데이터가 적거나 불확실한 경우 사전 분포를 이용해 추정값을 더욱 안정적으로 만들 수 있다.
 
 ### 0.2.4 Gaussian Distribution
-
+$$N(x|\mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}exp({-\frac{1}{2\sigma^2}(x-\mu)^2})$$
+- 2개의 파리미터(모수,parameter) : $\mu$:평균(mean), $\sigma$:표준편차(standard deviation)
+- 정확도(precision) : 분산(표준편차 제곱)의 역수  $\beta = \frac{1}{\sigma^2}$
+- 가우시안 분포, 즉 정규분포의 장점은 1차원의 속성을 D차원으로 확장 가능하다는 것이다. 이를 다변량(multinominal) 가우시안 분포라고 부른다.
+  $$N(x|\mu, \Sigma) = \frac{1}{(2\pi)^{D/2}|\Sigma|^{1/2}} exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)) (\Sigma:covariance:DxD)$$
+- 주어진 데이터가 어떤 가우시안 분포를 따르는지 해를 구하려면 **평균과 분산**(파라미터)를 추정하면 된다.
+  $$\mu_{MLE} = \frac{1}{N} \sum\limits_{n=1}^N x_n \quad \sigma_{MLE}^2 = \frac{1}{N} \sum\limits_{n=1}^N {(x_n - \mu_{MLE})}^2$$
+- MLE에서 발생하는 over-fitting의 한 예는 분산값의 bias이다.
+모집단의 샘플 그룹들에 대해 각각의 평균 값을 평균하면 실제 평균값과 가까워진다. 그러나 각각의 분산 값을 평균해도 실제 분산 값에 가까워지진 않는다.
+  ![image](https://github.com/baejaeho18/MachineLearning/assets/37645490/c0d493fe-d104-4273-8536-cae55cf32b8a)
 
 ## 0.3 Information Theory - 와 진짜 재밌다 하.하.하!
 정보(information) : "학습에 있어 필요한 놀람의 정도(degree of surprise)"
