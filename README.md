@@ -154,18 +154,29 @@ Question? 주어진 label이 거짓일 경우를 모델이 고려할 수 있는�
 
 
 # 1. Clustering : Unsupervised Learning
-
 ## Dimension Reduction
-
 ## Nonlinear Dimension Reduction
 
 # 2. Classification : Supervised Learning
+## 2.1 Discriminant Functions
+## 2.2 Laplace Approximation
+## 2.3 Bayesian Logistic Regression
 
 # 3. Ensemble Learning
 
 # 3. Regression : Supervised Learning
+## 3.1 Linear Regression
+## 3.2 MLE and LSE
+### Maximum Likelihood
+### Least Squares
+## 3.3 Bias-Variance Decomposition
+## 3.4 Bayesian Linear Regression
 
 # 4. Neural Netowrks
+## 4.1 Feed-forward Network
+## 4.2 Network Training
+## 4.3 Error Backpropagation
+## 4.4
 
 # 5. Numerical Optimization
 
@@ -177,7 +188,7 @@ Question? 주어진 label이 거짓일 경우를 모델이 고려할 수 있는�
 
 ## SVM
 
-
+## EM?
 
 [[blog]](https://norman3.github.io/prml/)
-## HMM
+## HMM?
