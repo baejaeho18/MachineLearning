@@ -70,7 +70,7 @@ $$E_{RMS} = \sqrt{\frac{2E(w^*)}{N}} (N:sample\ size)$$
 * product rule : $p(X,Y) = p(Y|X)p(X)$ (if 
 * Bayesian rule : $p(Y|X) = \frac{p(X|Y)p(Y)}{p(X)}$ [[blog]](https://roytravel.tistory.com/350)
 ### 0.2.1 Desity Estimation
-밀도 추정(Density Estimation) : 주어진 데이터로부터 확률 밀도 함수(probability density function, PDF)를 추정하는 과정
+밀도 추정(Density Estimation) : 주어진 데이터x로부터 확률 밀도 함수(probability density function, PDF)를 추정하는 과정
 * 확률이 이산(discrete)적인 사건
   - Histogram
   - PMF(Probability Mass Function) : 각 데이터 포인트에 대한 상대 빈도를 계산
@@ -106,6 +106,18 @@ $$N(x|\mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}exp({-\frac{1}{2\sigma^2}(x
 모집단의 샘플 그룹들에 대해 각각의 평균 값을 평균하면 실제 평균값과 가까워진다. 그러나 각각의 분산 값을 평균해도 실제 분산 값에 가까워지진 않는다.
   ![image](https://github.com/baejaeho18/MachineLearning/assets/37645490/c0d493fe-d104-4273-8536-cae55cf32b8a)
 
+### 0.2.5 Non-parametic Methods
+multi-modal D차원 상의 데이터는 N번 관찰 시 V크기의 부피공간 영역R에 속하는 데이터의 수K로 확률밀도함수p(x)를 표현할 수 있다.
+$$P = \int_R p(x) dx = p(x)V \quad p(x) = \frac{K}{NV}$$
+* KDE(Kernel Density Estimators) : V를 고정시키고 K를 결정
+  - 커널 함수(kernel method) : 임의의 한 점 x가 주어졌을 때, 각 차원으로 h 거리 내에 존재하는 모든 샘플을 센다.
+  - smoothing : 연속적인 확률분포를 구성하기 위해 하나의 샘플$x_n$에 대해 중심이 $x_n$이고 표준편차가 h인 정규분포를 만들고 이를 합하여 새로운 밀도함수를 만들어내는 것.
+  - h값이 충분히 크지 않으면 under-smooth, 충분히 작지 않으면 over-smooth가 발생한다.
+* KNN(K-NEarest Neighbors) : K를 고정시키고 V를 결정
+  - 샘플 데이터 $x_n$을 중심으로 하는 구(sphere)가 K개의 샘플을 포함할 때까지 구의 반지름을 늘려, 구의 부피V와 확률밀도p(x)를 구한다.
+  - 주로 분류(classification) 문제에 사용된다.
+  - K값으로 smoothing 정도를 조절할 수 있다.
+
 ## 0.3 Information Theory - 와 진짜 재밌다 하.하.하!
 정보(information) : "학습에 있어 필요한 놀람의 정도(degree of surprise)"
   $$h(x) = -log_2p(x)$$
@@ -135,9 +147,10 @@ mutual information : y를 알고 난 후에 x의 불확실성을 줄이는 과�
 
 ## 0.4 Decision Theory
 확률적 표현을 바탕으로 적절한 기준에 따라 최적의 예측을 수행할 수 있는 방법론을 제공한다.
+Loss function(know as Cost function) : 하나의 샘플x가 실제로는 특정 클래스 $C_k$에 속하지만, 모델이 이 샘플의 클래스를 $C_j$로 선택할 때 들어가는 비용을 정의
+$$E[L] = \sum_k\sum_j\int_{R_j}L_{kj}[(x,C_k)dx$$
 
-
-
+Question? 주어진 label이 거짓일 경우를 모델이 고려할 수 있는가? 
 
 
 # 1. Clustering : Unsupervised Learning
