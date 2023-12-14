@@ -37,9 +37,9 @@ Object : 학습 데이터를 이용하여 모델을 근사한 후, 임의의 입
 * Probablility Theory : 불확실성을 정량화시켜 표현할 수 있는 수학적인 프레임워크를 제공
 * Decision Theory : 확률적 표현을 바탕으로 적절한 기준에 따라 최적의 예측을 수행할 수 있는 방법론을 제공 
 
-**1) Task1** : 모델링할 함수를 알아내기 위해 이를 근사할 수 있는 근사 식이 필요하다.
+**1) Task1** : 모델링할 함수를 알아내기 위해 이를 근사할 수 있는 근사(Approximate)식이 필요하다.
 $$y(x, w) = w_0 + w_1x + w_2x^2 + \ldots + w_Mx^M = \sum\limits_{i=0}^M w_ix^i$$
-* 테일러 급수 : 차수(M)을 늘릴수록 특정 위치에서의 함수를 잘 근사 - 일반화에는 약간 거리가 있음 [[blog]](https://darkpgmr.tistory.com/59)
+* Tayler seires : 차수(M)을 늘릴수록 특정 위치에서의 함수를 잘 근사. 일반화에는 약간 거리가 있음 [[blog]](https://darkpgmr.tistory.com/59)
   $$f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f'''(a)}{3!}(x-a)^3 + \ldots$$
 * 퓨리에 변환식
   $$F(w) = \int_{-\infty}^{\infty} f(t)e^{-iwt}dt$$
@@ -142,7 +142,8 @@ $E[length] = \frac{1}{2} * 1 + \frac{1}{4} * 2 + \frac{1}{8} * 3 + \frac{1}{16} 
 mutual information : y를 알고 난 후에 x의 불확실성을 줄이는 과정
 * 연관 엔트로피(Relative entropy)
   - Relative Entropy 또는 KL(Kullback-Leibler) divergence
-  - Jensen's Inequality for convex function [[blog]](https://blog.naver.com/PostView.naver?blogId=sw4r&logNo=221166257113) <br>
+  - Jensen's Inequality for convex function [[blog]](https://blog.naver.com/PostView.naver?blogId=sw4r&logNo=221166257113)
+$$\ if\ \phi(E[X]) \leq E[\phi(X)] \, \phi(x)\ is\ convex$$
   즉, KL divergence를 최소화하는 것은 likelihood(가능도 함수)를 최대화 시키는 것과 동일하다 -> MLE와 연관성을 지님 <br>
 
 ## 0.4 Decision Theory
