@@ -182,7 +182,8 @@ $$\ if\ \phi(E[X]) \leq E[\phi(X)] \, \phi(x)\ is\ convex$$
 
 # 1. Clustering
 Unsupervised Learning : only input $x$ with no label
-## 1.1 clustering : grouping samples in a way that samples in the same group are more similar to each other than to those in other groups
+## 1.1 clustering
+* clustering : grouping samples in a way that samples in the same group are more similar to each other than to those in other groups
   - How to measure the similarity?
   - How many clusters?
 * Hierarchical Clustering
@@ -192,14 +193,14 @@ Unsupervised Learning : only input $x$ with no label
   - k개의 중심점을 랜점으로 초기화 -> 클러스터에 데이터 합류 -> 클러스터 평균을 계산해 중심접 업데이트 <br>
   - 초기 중심 선택에 종속적이며 distance function이 중요하다. outlier들에 민감하다.
 * MoG(Mixture of Gaussian, known as GMM) : a distribution can be approximated by a weighted sum of M components Gaussian densities <br>
-  - parameters : {$\pi_i, \mu_i, \Sigma_i$} <br>
+  - parameters : { $\pi_i, \mu_i, \Sigma_i$ } <br>
   <img width="200" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/dad8a830-afb2-45e9-b9ae-68aafcca6b6f"> <br>
   - EM : since Z in unknown, we want to maximize the expectation of log probability (joint probability or likelihood) across all possible Z <br>
   in EM, it uses the distribution of hidden variables Z instead of using the best Z
-  - Expectation step : estimate parameters using Lagrange multiplier, considering no prior
-    <img width="100" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/98b701f2-9a16-4ace-9c2e-2458125d9a6d"> <br>
-  - Maximization step : maximize the posterior probability(or likelihood)
-    <img width="160" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/9f0b0b6b-ba40-4801-8fd8-0cb4c13999b9"> <br>
+  - Expectation step : estimate parameters using Lagrange multiplier, considering no prior <br>
+    <img width="200" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/98b701f2-9a16-4ace-9c2e-2458125d9a6d"> <br>
+  - Maximization step : maximize the posterior probability(or likelihood) <br>
+    <img width="250" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/9f0b0b6b-ba40-4801-8fd8-0cb4c13999b9"> <br>
 
 ## 1.2 Dimension Reduction
 More features porived more informaation and potentially high accuracy <br>
@@ -207,15 +208,27 @@ but make harder to train a classifier(curse of dimensionality)  <br>
 with increasing the possibility of overfitting <br>
 => DR(Finds continuous latent variable, like Z) could be a rescue
 ### PCA: Principal Component Analysis
-
-FA
-MDS
+* PCA is a linear projection  of the data onto a lower dimension space z
+- minimal reconstruction error(RSS:residual sum of square) : $||x - \overset{~}{x}||$
+- maximal preserved variance
+* PPCA(Probabilistic PCA) : (gaussian distribution)probabilistic model of PCA for the observed data
+- maximum-likelihood parameter estimates
+- generative view : sampling x conditioned on the laten value z
+* FA and PCA
+  - PCA transforms the obsrevations to a new space with the larger variance
+  - FA describes observations in term of latent variable, factors
+* MDS(Multi-dimentional scaling)
 ### LDA: Linear Discriminatn Analysis
-
+extensions from PCA to supervised learning(classification) <br>
+<img width="500" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/60c67528-ad04-48da-aae6-51804999e804"> <br>
+Objective : maximize the ratio of the variance between classes to the one within the classes on the projected space
 ### ICA: Independent Component Analysis
-
+extensions from PCA to independent factors <br>
+<img width="150" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/0eb3213b-228a-4975-8afc-1084c2e5c80f"> <br>\
+decompose given multivariate data into a linear sum of statistically independent components <br>
+Objective : max likelihood, max nonGaussianity, min/mutual informatin
 ### NMF: Non-negative Matrix Factorization
-
+constraint : W and H can not have negative value
 ## Reppresentation Learning
 RBM
 ## Nonlinear Dimension Reduction
