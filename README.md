@@ -182,7 +182,7 @@ $$\ if\ \phi(E[X]) \leq E[\phi(X)] \, \phi(x)\ is\ convex$$
 
 # 1. Clustering
 Unsupervised Learning : only input $x$ with no label
-* clustering : grouping samples in a way that samples in the same group are more similar to each other than to those in other groups
+## 1.1 clustering : grouping samples in a way that samples in the same group are more similar to each other than to those in other groups
   - How to measure the similarity?
   - How many clusters?
 * Hierarchical Clustering
@@ -194,18 +194,27 @@ Unsupervised Learning : only input $x$ with no label
 * MoG(Mixture of Gaussian, known as GMM) : a distribution can be approximated by a weighted sum of M components Gaussian densities <br>
   - parameters : {$\pi_i, \mu_i, \Sigma_i$} <br>
   <img width="200" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/dad8a830-afb2-45e9-b9ae-68aafcca6b6f"> <br>
-  - in EM, it uses the distribution of hidden variables Z instead of using the best Z
-  - Expectation step : estimate parameters using Lagrange multiplier
-  - Maximization step : maximize the posterior probability(or likelihood) 
-  
-  
+  - EM : since Z in unknown, we want to maximize the expectation of log probability (joint probability or likelihood) across all possible Z <br>
+  in EM, it uses the distribution of hidden variables Z instead of using the best Z
+  - Expectation step : estimate parameters using Lagrange multiplier, considering no prior
+    <img width="100" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/98b701f2-9a16-4ace-9c2e-2458125d9a6d"> <br>
+  - Maximization step : maximize the posterior probability(or likelihood)
+    <img width="160" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/9f0b0b6b-ba40-4801-8fd8-0cb4c13999b9"> <br>
 
+## 1.2 Dimension Reduction
+More features porived more informaation and potentially high accuracy <br>
+but make harder to train a classifier(curse of dimensionality)  <br>
+with increasing the possibility of overfitting <br>
+=> DR(Finds continuous latent variable, like Z) could be a rescue
+### PCA: Principal Component Analysis
 
-## Dimension Reduction
-PCA
+FA
+MDS
+### LDA: Linear Discriminatn Analysis
 
-## factor Analysis
-ICA
+### ICA: Independent Component Analysis
+
+### NMF: Non-negative Matrix Factorization
 
 ## Reppresentation Learning
 RBM
