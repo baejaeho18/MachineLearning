@@ -1,5 +1,5 @@
 # 0. Machine Learning
-## 0.1 AI History
+## 0.0 AI History
 ### Approaches
 <img width="400" alt="image" src="https://github.com/baejaeho18/MyLibrary/assets/37645490/0468952e-3c6b-4ef8-822b-346f04bf8860"> <br>
 ### Timeline
@@ -70,7 +70,7 @@ $$E_{RMS} = \sqrt{\frac{2E(w^*)}{N}} (N:sample\ size)$$
 * product rule : $p(X,Y) = p(Y|X)p(X)$ (if 
 * Bayesian rule : $p(Y|X) = \frac{p(X|Y)p(Y)}{p(X)}$ [[blog]](https://roytravel.tistory.com/350)
 ### 0.2.1 Desity Estimation
-밀도 추정(Density Estimation) : 주어진 데이터x로부터 확률 밀도 함수(probability density function, PDF)를 추정하는 과정
+밀도 추정(Density Estimation) : 주어진 데이터x로부터 확률 밀도 함수(probability density function, PDF)를 추정하는 과정 - unsupervised
 * 확률이 이산(discrete)적인 사건
   - Histogram
   - PMF(Probability Mass Function) : 각 데이터 포인트에 대한 상대 빈도를 계산
@@ -85,7 +85,14 @@ $$E_{RMS} = \sqrt{\frac{2E(w^*)}{N}} (N:sample\ size)$$
 * 임의의 변수 x,y에 대한 공분산(covariance)
   - cov[x,y] = E_{x,y}[(x - E[x])(y - E[y])] = E_{x,y}[xy] - E[x]E[y] (실수)
   - cov[x,y] = E_{x,y}[(x - E[x])(y^T - E[y^T])] = E_{x,y}[xy^T] - E[x]E[y^T] (벡터)
-
+* distributions
+  - uniform : continous variable
+  - Bernoulli : binary variable $E[x]=p \quad var[x] = p(1-p)$
+  - binomial : N times $var[m] = Np(1-p)$
+  - categorical : bernoulli to K-dim binary variable
+  - multinomial
+  - Laplacian : ㅅ shape
+  - beta and dirichlet : 
 ### 0.2.3 Bayesian Probabilities
 실제 측정된 빈도수에 따라 확률을 계산하는 Frequentism과 다르게 Baysianism은 믿음의 정도로 불확실성을 정량화할 수 있다. MLE(Maximun Likelihood Estimation)과 달리, 파라미터 w를 랜덤변수로 간주하여 확률분포를 사용한다. 
 $$p(w|D) = \frac{p(D|w)p(w)}{p(D)}$$
@@ -93,7 +100,6 @@ $$p(w|D) = \frac{p(D|w)p(w)}{p(D)}$$
 이후 실제 데이터를 통해 예측된 w의 확률(likelihood)를 조합하여 실제 w의 사후 확률(posterior)을 기술한다.
 사전확률로 인해 덜 극단적인 결과를 얻도록 보정된다.
 예를 들어, 사후 확률이 최대가 되는 파라미터 값을 찾는 MAP(Maximum A Posteriori) 추정은 데이터가 적거나 불확실한 경우 사전 분포를 이용해 추정값을 더욱 안정적으로 만들 수 있다.
-
 ### 0.2.4 Gaussian Distribution
 $$N(x|\mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}exp({-\frac{1}{2\sigma^2}(x-\mu)^2})$$
 - 2개의 파리미터(모수,parameter) : $\mu$:평균(mean), $\sigma$:표준편차(standard deviation)
@@ -104,26 +110,27 @@ $$N(x|\mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}exp({-\frac{1}{2\sigma^2}(x
   $$\mu_{MLE} = \frac{1}{N} \sum\limits_{n=1}^N x_n \quad \sigma_{MLE}^2 = \frac{1}{N} \sum\limits_{n=1}^N {(x_n - \mu_{MLE})}^2$$
 - MLE에서 발생하는 over-fitting의 한 예는 분산값의 bias이다.
 모집단의 샘플 그룹들에 대해 각각의 평균 값을 평균하면 실제 평균값과 가까워진다. 그러나 각각의 분산 값을 평균해도 실제 분산 값에 가까워지진 않는다.
-  ![image](https://github.com/baejaeho18/MachineLearning/assets/37645490/c0d493fe-d104-4273-8536-cae55cf32b8a)
-
+  ![image](https://github.com/baejaeho18/MachineLearning/assets/37645490/c0d493fe-d104-4273-8536-cae55cf32b8a) <br>
 ### 0.2.5 Non-parametic Methods
 multi-modal D차원 상의 데이터는 N번 관찰 시 V크기의 부피공간 영역R에 속하는 데이터의 수K로 확률밀도함수p(x)를 표현할 수 있다.
 $$P = \int_R p(x) dx = p(x)V \quad p(x) = \frac{K}{NV}$$
-* KDE(Kernel Density Estimators) : V를 고정시키고 K를 결정
-  - 커널 함수(kernel method) : 임의의 한 점 x가 주어졌을 때, 각 차원으로 h 거리 내에 존재하는 모든 샘플을 센다.
-  - smoothing : 연속적인 확률분포를 구성하기 위해 하나의 샘플$x_n$에 대해 중심이 $x_n$이고 표준편차가 h인 정규분포를 만들고 이를 합하여 새로운 밀도함수를 만들어내는 것.
+* **KDE**(Kernel Density Estimators) : V를 고정시키고 K를 결정
+  - 커널 함수(kernel method) : 임의의 한 점 x가 주어졌을 때, 각 차원으로 h 거리 내(Parzen Window)에 존재하는 모든 샘플을 센다 - 아직은 discontinuous
+  - smoothing : 연속적인 확률분포를 구성하기 위해 하나의 샘플 $x_n$ 에 대해 중심이 $x_n$이고 표준편차가 h인 정규분포(smooth kernel)를 만들고 이를 합하여 새로운 밀도함수를 만들어내는 것.
   - h값이 충분히 크지 않으면 under-smooth, 충분히 작지 않으면 over-smooth가 발생한다.
-* KNN(K-NEarest Neighbors) : K를 고정시키고 V를 결정
+* **KNN**(K-NEarest Neighbors) : K를 고정시키고 V를 결정
   - 샘플 데이터 $x_n$을 중심으로 하는 구(sphere)가 K개의 샘플을 포함할 때까지 구의 반지름을 늘려, 구의 부피V와 확률밀도p(x)를 구한다.
   - 주로 분류(classification) 문제에 사용된다.
   - K값으로 smoothing 정도를 조절할 수 있다.
+### 0.2.6 Semi-parametic Methods
+* mixture of Gaussian : clustering
 
 ## 0.3 Information Theory - 와 진짜 재밌다 하.하.하!
 정보(information) : "학습에 있어 필요한 놀람의 정도(degree of surprise)"
   $$h(x) = -log_2p(x)$$
 엔트로피(entropy) : "평균 정보량"이자 p(x)인 분포에서 h(x) 함수의 기댓값
-  $$H[x] = -\sum_x p(x)log_2p(x)$$
-- 밑수가 2라면 정보량의 단위는 bit라고 보면 된다.
+  $$H[X] = -\sum_x p(x)log_2p(x) \quad H[X] = -\int p(x)log_2p(x) dx$$
+- 밑수가 2라면 정보량의 단위는 bit라고 보면 된다. 밑수는 무엇이든 될 수 있다.
 - Non-Uniform 분포의 엔트로피는 Uniform 분포의 엔트로피보다 낮다. <br>
 ex) a,b,c,d,e,f,g,h 8글자의<br>
 확률분포가 동일($\frac{1}{8}$)할 경우 : $H[x] = -8 * \frac{1}{8}log_2\frac{1}{8} = 3 bits$ <br>
@@ -141,22 +148,69 @@ $E[length] = \frac{1}{2} * 1 + \frac{1}{4} * 2 + \frac{1}{8} * 3 + \frac{1}{16} 
 * 조건부 엔트로피(conditional entropy) <br>
 mutual information : y를 알고 난 후에 x의 불확실성을 줄이는 과정
 * 연관 엔트로피(Relative entropy)
-  - Relative Entropy 또는 KL(Kullback-Leibler) divergence
+  - Relative Entropy 또는 KL(Kullback-Leibler) divergence : digergence between two probability distributions p and q
+    $$KL(p||q) = - \int p(x)ln(\frac{q(x)}{p(x)}) dx = (cross-entropy) - (entropy-of-x)$$
+  <img width="600" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/1407e168-fdc9-4746-aebd-cc6e1b0941a4"> <br>
   - Jensen's Inequality for convex function [[blog]](https://blog.naver.com/PostView.naver?blogId=sw4r&logNo=221166257113)
 $$\ if\ \phi(E[X]) \leq E[\phi(X)] \, \phi(x)\ is\ convex$$
   즉, KL divergence를 최소화하는 것은 likelihood(가능도 함수)를 최대화 시키는 것과 동일하다 -> MLE와 연관성을 지님 <br>
 
 ## 0.4 Decision Theory
 확률적 표현을 바탕으로 적절한 기준에 따라 최적의 예측을 수행할 수 있는 방법론을 제공한다.
-Loss function(know as Cost function) : 하나의 샘플x가 실제로는 특정 클래스 $C_k$에 속하지만, 모델이 이 샘플의 클래스를 $C_j$로 선택할 때 들어가는 비용을 정의
-$$E[L] = \sum_k\sum_j\int_{R_j}L_{kj}[(x,C_k)dx$$
+- Generative Model : 데이터 생성과정을 모델링하여 분포를 학습하여 used for classification by the Bayes' rule
+  $$p(t|x) = \frac{p(x|t)p(t)}{p(x)}$$
+- Discriminative Model : 클래스 레이블을 학습하여 결정 경계를 찾아내 just for classification $p(t|x)$
+- Discrimination Function : model of map function
+### Probability Models for decision
+* Minimize misclassification rate <br>
+  <img width="300" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/66848de9-61f5-4aa3-84ad-4a189fcf98de"> <br>
+  $$p(mistake) = \int_{R_1} p(x,C_2)dx + \int_{R_2}p(x,C_1)dx = 1 - \sum\limits_{k=1}^K \int_{R_k}p(x,w_k)dx)$$
+* Minimize expected loss(Loss function, know as Cost function) : 하나의 샘플x가 실제로는 특정 클래스 $C_k$에 속하지만, 모델이 이 샘플의 클래스를 $C_j$로 선택할 때 들어가는 비용을 정의
+  $$E[L] = \sum_k\sum_j\int_{R_j}L_{kj}p(x,C_k)dx$$
+  - Mean Squared Error $\frac{1}{N}\sum\limits_{i=1}^N(t_i-y_i)^2$
+  - Cross Entropy : classification 문제에 사
+  - Hinge Loss : svm 모델에 사용 $max(0,1-ty)$
+### Discriminant Function
 
-Question? 주어진 label이 거짓일 경우를 모델이 고려할 수 있는가? 
+### Evaluation Metrics
+- Accuracy = $\frac{(TP+TN)}{Total}$ : 맞게 판단한 비율
+- Precision = $\frac{TP}{(TP+FP)}$ : 진짜라고 한 것 중 진짜인 비율
+- Recall = $\frac{TP}{(TP+FN)}$ : 진짜들 중 진짜인 비율
+- F1 score = $\frac{2PR}{(P+R)}$ : harmonic mean of Precision and Recall
+- Area Under the roc(TPR/FPR) Curve : perfect=1, random=0.5 <br>
+  <img width="300" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/0e6f5f16-369d-4513-b668-900760b5c31b"> <br>
+
+# 1. Clustering
+Unsupervised Learning : only input $x$ with no label
+* clustering : grouping samples in a way that samples in the same group are more similar to each other than to those in other groups
+  - How to measure the similarity?
+  - How many clusters?
+* Hierarchical Clustering
+  - bottom-up : merge the closest(nearest/average/fareast) groups one by one until the number of cluster of cohesion threshold
+  - top-down
+* kMeans 
+  - k개의 중심점을 랜점으로 초기화 -> 클러스터에 데이터 합류 -> 클러스터 평균을 계산해 중심접 업데이트 <br>
+  - 초기 중심 선택에 종속적이며 distance function이 중요하다. outlier들에 민감하다.
+* MoG(Mixture of Gaussian, known as GMM) : a distribution can be approximated by a weighted sum of M components Gaussian densities <br>
+  - parameters : {$\pi_i, \mu_i, \Sigma_i$} <br>
+  <img width="200" alt="image" src="https://github.com/baejaeho18/MachineLearning/assets/37645490/dad8a830-afb2-45e9-b9ae-68aafcca6b6f"> <br>
+  - in EM, it uses the distribution of hidden variables Z instead of using the best Z
+  - Expectation step : estimate parameters using Lagrange multiplier
+  - Maximization step : maximize the posterior probability(or likelihood) 
+  
+  
 
 
-# 1. Clustering : Unsupervised Learning
 ## Dimension Reduction
+PCA
+
+## factor Analysis
+ICA
+
+## Reppresentation Learning
+RBM
 ## Nonlinear Dimension Reduction
+
 
 # 2. Classification : Supervised Learning
 ## 2.1 Discriminant Functions
