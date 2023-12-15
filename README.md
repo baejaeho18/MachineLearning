@@ -235,6 +235,14 @@ RBM
 
 
 # 2. Classification : Supervised Learning
+Supervised Learning : classification and regression both
+- classification : predicting a discrete label of input(interested in the boundary of classes)
+- regression : predicting the quantity of output(interested in the relationship of input and output)
+- data and label
+- training/valid/test sets
+- cross-validation : split the data into training(including validation) and testing <br>
+  random subsampling, K-fold, leave-one-out, etc
+- approach for overfitting : more data samples, simpler model, regularization methods, early stopping
 ## 2.1 Discriminant Functions
 ## 2.2 Laplace Approximation
 ## 2.3 Bayesian Logistic Regression
