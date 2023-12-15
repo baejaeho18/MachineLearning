@@ -243,18 +243,65 @@ Supervised Learning : classification and regression both
 - cross-validation : split the data into training(including validation) and testing <br>
   random subsampling, K-fold, leave-one-out, etc
 - approach for overfitting : more data samples, simpler model, regularization methods, early stopping
-## 2.1 Discriminant Functions
-## 2.2 Laplace Approximation
-## 2.3 Bayesian Logistic Regression
-
-# 3. Ensemble Learning
+## 2.1 kNN
+* pros
+  - no conditional costs for training (:lazy memory-based learning)
+  - easy to implement
+  - converges to optimal calssifier
+* cons
+  - higher computational costs for testing
+  - greater storage requirements
+  - curse of dimensionality
+* Solve
+  - approximation for speed-up : bucketing, k-d tree(select an randome axis to construct k-d trees)
+  - proper k needs to avoid under/over-fitting
+## 2.2 Decision Tree(DT)
+* DT is a tree-shaped prediction model : sequence of questions = non-metric method without a measure of distance between features
+- prediction : how can we predict new data?
+- training : how could we select odd branch?
+* Gini impurity(used in CART) measures how often a decision would be incorrect if it was randomly labeled according th the distribution of labels in the subset.
+  $$$GI = 1 - \sum\limits_i^c \pi^2 dx$$
+* Information Gain(used in ID3, C4.5) calculates the decrease in entropy after the dataset is split on a feature
+  $$IG = H(T) - H(T|a)$$
+  The highest IG is selected to split
+* Importance of node $n$ = $p_nGI_n - p_{ln}GI_{ln} - p_{rn}GI_{rn}
+* pros
+  - simple to understand, interpret and visualize
+  - little effort is required for data preparation : normalization is not required
+  - able to obtain non-linear decision boundaries
+  - can handle both numeric and categorical data
+* cons
+  - overfitting
+  - high variance(less stable)
+  - not able to extrapolate : can not apply to new sample data
+## 2.3 Random Forest
+ensemble learning method by consturcting a set of decision tree
+### Ensemble Learning
+An ensemble of classifiers is a aset of classifiers. 
+They take simple algorithms and transform them into a super classifier without requireing any new algorithm
+- bagging(or Boostrap Aggregating) : try model parallel and combine them <br>
+  variance reduction
+- boosting : sequentially combine multiple base calssifiers(weak learners) <br>
+  bias reduction
+  ex) AdaBoost
+- Stacking : use the prediction of models as a training data
+* Mixture of Experts : locally work experts got a seperate task
 
 # 3. Regression : Supervised Learning
-## 3.1 Linear Regression
-## 3.2 MLE and LSE
+To predict the target y given a D-dimensional vector x <br>
+or to estimate the relationship between x and y <br>
+or to find the function from x to y <br>
+(x:independent variable, features, predictors / y:dependent variable, outcome)
+## 3.1 MLE and LSE
 ### Maximum Likelihood
 ### Least Squares
+
+## 3.2 Logistic Regression
+To model categorical/continuous variables <Br>
+- multinomial logistic regression(softmax regression)
+
 ## 3.3 Bias-Variance Decomposition
+
 ## 3.4 Bayesian Linear Regression
 
 # 4. Neural Netowrks
